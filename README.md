@@ -8,7 +8,7 @@ W przypadku Deploymentu jest on przeznaczony do zarządzania aplikacjami, które
 Gdy Deployment zostanie zeskalowany "w górę" nowo utworzone repliki są niezależne od siebie, a ich instancje równoważne.
 Natomiast podczas skalowania "w dół" dowolne z replik mogą być usunięte.
 
-Natomiast StatefulSet służuy do zarządzania aplikacjami stanowymi (ang. stateful). Aplikacje stanowe wymagają, aby poszczególne instancje były zachowywane, np. bazy danych.
+Natomiast StatefulSet służy do zarządzania aplikacjami stanowymi (ang. stateful). Aplikacje stanowe wymagają, aby poszczególne instancje były zachowywane, np. bazy danych.
 Podczas gdy StatefulSet zostanie przeskalowany "w górę" powstające repliki mają swoje unikalne nazwy oraz są tworzone w określonej kolejności.
 Zachowana kolejność w przypadku skalowania "w dół" jest wykorzystywana, by ostatnia stworzona replika została usunięta jako pierwsza, przedostania jako druga itd.
 
@@ -34,9 +34,7 @@ kubectl apply -f stateful4db.yaml
 
 Na początek należy sprawdzić stan podów i zweryfikować działanie StatefulSetu.
 
-```
-bash
-                                                                           
+```                                                                      
 ┌──(kali㉿kali)-[~]
 └─$ kubectl get pods       
 NAME      READY   STATUS    RESTARTS   AGE
@@ -45,7 +43,6 @@ mysql-1   1/1     Running   0          16s
 mysql-2   1/1     Running   0          12s
 ```
 ```
-bash
 ┌──(kali㉿kali)-[~]
 └─$ kubectl get statefulset
 NAME    READY   AGE
@@ -53,8 +50,7 @@ mysql   3/3     116s
 ```
 
 - **Skalowanie w dół**
-- ```
-bash
+```
 ┌──(kali㉿kali)-[~]
 └─$ kubectl scale statefulset mysql --replicas=2
 statefulset.apps/mysql scaled
@@ -66,8 +62,7 @@ mysql-0   1/1     Running   0          4m52s
 mysql-1   1/1     Running   0          4m12s
 ```
 - **Skalowanie w górę**
-- ```
-bash
+```
 ┌──(kali㉿kali)-[~]
 └─$ kubectl scale statefulset mysql --replicas=4
 statefulset.apps/mysql scaled
